@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HomeController;
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,6 +40,17 @@ Route::group(['prefix' => 'admin'],function (){
         //Category Routes
         Route::get('/categories/create',[CategoryController::class,'create'])->name('categories.create');
         Route::post('/categories',[CategoryController::class,'store'])->name('categories.store');
+
+        Route::get('/getSlug',function (Request $request){
+            $slug = '';
+            if (!empty($request->title)) {
+                $slug = Str::slug($request->title);
+            }
+            return response()->json([
+                'status' => true,
+                'slug' => $slug
+            ]);
+        });
 
     });
 

@@ -110,6 +110,16 @@
                 }
             })
         });
+
+        $.ajax({
+            url: '{{ route("categories.store") }}',
+            type: 'post',
+            data: element.serializeArray(),  // Corrected typo here
+            dataType: 'json',
+            success: function (response) {
+
+            }
+        });
     </script>
 
 @endsection
